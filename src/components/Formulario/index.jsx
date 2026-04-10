@@ -1,15 +1,27 @@
-import React from 'react'
+import React, { useState } from "react";
+import FormularioProduto from "./FormularioProduto";
+import FormularioTag from "./FormularioTag";
+import FormularioEstoque from "./FormularioEstoque";
+import "./Formulario.css";
 
 const Formulario = () => {
- return (
-  <div className="painel">
-    <button onClick={trocarFormulario}>></button>
+  const [tipo, setTipo] = useState("produto");
 
-    {tipo === 'produto' && <FormularioProduto />}
-    {tipo === 'tag' && <FormularioTag />}
-    {tipo === 'estoque' && <FormularioEstoque />}
-  </div>
-)
-}
+  const trocarFormulario = () => {
+    if (tipo === "produto") setTipo("tag");
+    else if (tipo === "tag") setTipo("estoque");
+    else setTipo("produto");
+  };
 
-export default Formulario
+  return (
+    <div className="painel">
+      <button onClick={trocarFormulario}>Trocar</button>
+
+      {tipo === "produto" && <FormularioProduto />}
+      {tipo === "tag" && <FormularioTag />}
+      {tipo === "estoque" && <FormularioEstoque />}
+    </div>
+  );
+};
+
+export default Formulario;
